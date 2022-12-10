@@ -1,0 +1,36 @@
+{% extends 'inventory/main.html' %}
+
+{% block content %}
+
+<br>
+<div class="row">
+    <div class="col-md">
+        <div class="card card-body">
+            <a class="btn btn-primary btn-lg btn-block" href="{% url 'create_stock' %}">Add New Item</a>
+        </div>
+        <div class="card card-body">
+            <table class="table">
+                <tr>
+                    <th>SKU</th>
+                    <th>Product Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                </tr>
+
+                {% for row in data %}
+                    <tr>
+                        <td>{{row.sku}}</td>
+                        <td>{{row.name}}</td>
+                        <td>{{row.price}}</td>
+                        <td>{{row.quantity}}</td>
+                        <td><a class="btn btn-primary btn-sm" href="{% url 'update_stock' row.sku %}">Update</a></td>
+                    </tr>
+                {% endfor %}
+                
+            </table>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock %}

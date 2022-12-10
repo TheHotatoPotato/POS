@@ -1,0 +1,75 @@
+{% extends 'inventory/main.html' %}
+{% block content %}
+
+<br>
+<!-- 'products': data, 'orders': order_data, 'customers': customer_data, 'sales': sales_data -->
+<div style="padding-left: 10px; padding-right: 10px;">
+  <div class="row">
+      <div class="col-md-12">
+          <div class="card-deck">
+              <div class="card">
+                <div class="card-body" style="background-color: aquamarine;">
+                  <h4 class="card-title" style="text-align: center;">SKUS</h4>
+                  <p class="card-text" style="text-align: center; font-size: 50px;">{{skus}}</p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-body" style="background-color: aquamarine;">
+                  <h4 class="card-title" style="text-align: center;">ORDERS</h4>
+                  <p class="card-text" style="text-align: center; font-size: 50px;">{{orders}}</p>
+                </div>
+              </div>
+              <div class="card">
+                <div class="card-body" style="background-color: aquamarine;">
+                  <h4 class="card-title" style="text-align: center;">CUSTOMERS</h4>
+                  <p class="card-text" style="text-align: center; font-size: 50px;">{{customers}}</p>
+                </div>
+              </div>
+            </div>
+      </div>
+    </div>
+    <br>
+    <div class="row">
+      <div class="col-md-12">
+          <div class="card-deck">
+              <div class="card">
+                <div class="card-body" style="text-align: center; background-color: black;">
+                  <h4 class="card-title" style="color: white">SALES</h4>
+                  <p class="card-text" style="text-align: center; font-size: 50px; color: white">{{sales}} PKR</p>
+                </div>
+            </div>
+      </div>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="col-md-12">
+    <h3>PRODUCTS</h3>
+    <hr>
+    <div class="card card-body" style="max-height: 300px; overflow-y: scroll;">
+        <table class="table table-sm">
+            <tr>
+                <th>SKU</th>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th></th>
+            </tr>
+            {% for product in products %}
+                    <tr>
+                        <td>{{product.sku}}</td>
+                        <td>{{product.name}}</td>
+                        <td>{{product.price}}</td>
+                        <td>{{product.quantity}}</td>
+                        {% if product.quantity == 0 %}
+                            <td><p>out of stock</p></td>
+                        {% endif %}
+                    </tr>
+            {% endfor %}
+        </table>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

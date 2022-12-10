@@ -1,0 +1,40 @@
+{% load static %}
+
+<style>
+  .hello-msg{
+    font-size: 18px;
+    color: #fff;
+    margin-left: auto;
+    /* justify-content: right; */
+    /* margin-right: 20px; */
+  }
+</style>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <!-- <a class="navbar-brand" href="#">DB PROJ</a> -->
+    <a class="navbar-brand" href="#"><i class="fa-solid fa-cog fa-spin"></i></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-item nav-link" href="{% url 'home' %}">Home</a>
+        {% if request.user.is_authenticated %}
+          {% if request.user.is_superuser == False %}
+            <a class="nav-item nav-link" href="{% url 'cashier' %}">Cashier</a>
+            <a class="nav-item nav-link" href="{% url 'cart' %}">Cart</a>
+          {% endif %}
+          <a class="nav-item nav-link" href="{% url 'stock' %}">Inventory</a>
+          {% if request.user.is_superuser %}
+            <a class="nav-item nav-link" href="{% url 'owner' %}">Analytics</a>
+          {% endif %}
+          <a class="nav-item nav-link" href="{% url 'change_password' %}">Change Password</a>
+        {% endif %}
+      </div>
+    </div>
+    <div class=".hello-msg">
+      {% if request.user.is_authenticated %}
+          <span class="hello-msg">{{request.user}} | <a href="{% url 'logout' %}" style="color: #fff; font-weight: bold;">LOGOUT</a></span> 
+      {% endif %}
+    </div>
+</nav>

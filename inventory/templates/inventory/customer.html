@@ -1,0 +1,68 @@
+{% extends 'inventory/main.html' %}
+{% load static %}
+
+{% block content %}
+
+<br>
+
+<div style="padding-left: 10px; padding-right: 10px;">
+	<div class="row">
+		<div class="col-md-12">
+			<h5>My Info</h5>
+			<hr>
+			<div class="card card-body" style="max-height: 300px; overflow-y: scroll;">
+                <table class="table table-sm">
+                    <tr>
+                        <th>Name</th>
+                        <th>Last Name</th>
+                        <th>Email</th>
+                        <th>Loyalty Points</th>
+                        <th>Customer Since</th>
+                        <th>Last Login</th>
+                    </tr>
+                    {% for chosen in data %}
+                    <tr>
+                        <td>{{chosen.first_name}} {{chosen.last_name}}</td>
+                        <td>{{chosen.last_name}}</td>
+                        <td>{{chosen.email}}</td>
+                        <td>{{customer.loyalty_points}}</td>
+                        <td>{{chosen.date_joined}}</td>
+                        <td>{{chosen.last_login}}</td>
+                    </tr>
+                    {% endfor %}
+                </table>
+			</div>
+		</div>
+    </div>
+</div>
+
+<br>
+
+<div style="padding-left: 10px; padding-right: 10px;">
+	<div class="row">
+		<div class="col-md-12">
+			<h5>Order History</h5>
+			<hr>
+			<div class="card card-body">
+                <table class="table table-sm">
+                    {% for ouda in order %}
+                        <tr>
+                            <td><b>Order ID: {{ouda.id}} | Total: {{ouda.get_cart_total}} | Date: {{ouda.date_created}}</b> {% if ouda.loyalty_used == True %} <button type="button" class="btn btn-success">REDEEMED</button>{% endif %}{% if ouda.refund_status == True %} <button type="button" class="btn btn-danger">REFUNDED</button>{% endif %}</td>
+                            <td><b>Quantity</b></td>
+                            <td><b>Price</b></td>
+                        </tr>
+                        {% for item in ouda.orderitem_set.all %}
+                        <tr>
+                            <td>{{item.stock.name}}</td>
+                            <td>{{item.quantity}}</td>
+                            <td>{{item.get_total}}</td>
+                        </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </table>
+			</div>
+		</div>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'inventory/main.html' %}
+{% block content %}
+<div class="row">
+	<div class="col-md-10">
+		<div class="card card-body">
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{form}}
+                <input type="submit" name="submit">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
