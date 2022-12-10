@@ -76,7 +76,7 @@ def registerCust(request):
             messages.success(request, 'Account was created successfully for ' + username)
             return redirect('loginCust')
     context = {'form': form}
-    return render(request, 'inventory/registerCust.html', context)
+    return render(request, 'inventory/registercust.html', context)
 
 @unauthenticated
 def registerCash(request):
